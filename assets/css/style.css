@@ -1,0 +1,1962 @@
+/* ================================================================
+   PROJECT JUNIOR — Mobile-First Romantic Birthday Website
+   Palette: #0a0a0f (midnight), #6b1e2e (burgundy), #e8a0af (rose pink),
+            #c9a84c (champagne gold), #fff5f5 (blush white)
+   Optimized for mobile touchscreens (320px+), safe-areas, svh units
+   ================================================================ */
+
+/* ── Reset & Base ─────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+  --midnight:     #0a0a0f;
+  --deep-night:   #131018;
+  --burgundy:     #6b1e2e;
+  --burgundy-dim: rgba(107, 30, 46, 0.4);
+  --rose:         #e8a0af;
+  --rose-light:   #f7d3dc;
+  --rose-glow:    rgba(232, 160, 175, 0.28);
+  --gold:         #c9a84c;
+  --gold-light:   #f5e0a0;
+  --gold-glow:    rgba(201, 168, 76, 0.3);
+  --blush:        #fff5f5;
+  --white:        #ffffff;
+
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-alt:   'Cormorant Garamond', Georgia, serif;
+  --font-body:  'Lato', system-ui, -apple-system, sans-serif;
+
+  --transition: 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  --radius-sm:  10px;
+  --radius-md:  16px;
+  --radius-lg:  22px;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  background: var(--midnight);
+  color: var(--blush);
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--midnight);
+  color: var(--blush);
+  overflow-x: hidden;
+  min-height: 100vh;
+  min-height: 100svh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Reduced Motion Support ───────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .bd-gif { animation: none !important; }
+  .petal, .heart-float, .cake__flame, .gift-box { animation: none !important; }
+  .btn-surprise__ring { animation: none !important; }
+  .confetti-container { display: none !important; }
+}
+
+/* ================================================================
+   MOBILE-FIRST SECTIONS LAYOUT
+   ================================================================ */
+.section {
+  position: fixed;
+  inset: 0;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* CRITICAL: Never justify-content: center with overflow! */
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  /* Safe area padding for mobile notch, bottom home indicator, and side controls */
+  padding-top: max(1.75rem, env(safe-area-inset-top));
+  padding-bottom: max(5.5rem, calc(env(safe-area-inset-bottom) + 4.5rem));
+  padding-left: max(1rem, env(safe-area-inset-left));
+  padding-right: max(1.75rem, calc(env(safe-area-inset-right) + 1.25rem));
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(18px);
+  transition: opacity var(--transition), transform var(--transition);
+  z-index: 0;
+}
+
+.section.hidden {
+  display: none !important;
+}
+
+.section.active {
+  display: flex !important;
+  opacity: 1;
+  pointer-events: all;
+  transform: translateY(0);
+  z-index: 10;
+}
+
+/* ── Content Wrapper Safe Centering ───────────────────────────── */
+.welcome__content,
+.reveal__content,
+.timeline__wrapper,
+.letter__wrapper,
+.reasons__wrapper,
+.cake__content,
+.final__content {
+  margin: auto; /* Vertically centers when fitting, scrolls safely without clipping when exceeding height */
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ── Shared Section Titles ────────────────────────────────────── */
+.section-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.35rem, 6vw, 2.75rem);
+  color: var(--gold);
+  background: linear-gradient(135deg, #fff2cc 0%, var(--gold) 60%, #e6cc82 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.35rem;
+  line-height: 1.25;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.section-subtitle {
+  font-family: var(--font-alt);
+  font-size: clamp(0.95rem, 3.5vw, 1.25rem);
+  color: var(--rose-light);
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+  letter-spacing: 0.02em;
+}
+
+/* ================================================================
+   BUBU & DUDU POLAROID KEEPSAKE FRAMES & GIFS
+   ================================================================ */
+.bubu-dudu-pair {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Keepsake Polaroid Frame: Pure white interior keeps Bubu's white fur
+   and Dudu's dark fur pure, vibrant, and 100% free of blend-mode damage */
+.bd-frame {
+  background: var(--white);
+  border: 2px solid rgba(201, 168, 76, 0.45);
+  border-radius: var(--radius-lg);
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.55),
+    0 0 20px rgba(232, 160, 175, 0.22),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  overflow: hidden;
+}
+
+/* Decorative heart badge on top-right of main frames */
+.bd-frame::after {
+  content: '♥';
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 18px;
+  height: 18px;
+  background: linear-gradient(135deg, var(--burgundy), #9c2847);
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  color: #ffdce5;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+/* Mobile-Proportionate Frame Sizes */
+.bd-frame--welcome {
+  width: clamp(150px, 45vw, 210px);
+  height: clamp(150px, 45vw, 210px);
+  padding: 8px;
+}
+
+.bd-frame--reveal {
+  width: clamp(165px, 48vw, 230px);
+  height: clamp(165px, 48vw, 230px);
+  padding: 8px;
+}
+
+.bd-frame--letter {
+  width: clamp(95px, 25vw, 130px);
+  height: clamp(95px, 25vw, 130px);
+  padding: 6px;
+}
+
+.bd-frame--timeline {
+  width: clamp(125px, 34vw, 165px);
+  height: clamp(125px, 34vw, 165px);
+  padding: 6px;
+}
+
+.bd-frame--confession {
+  width: clamp(130px, 36vw, 175px);
+  height: clamp(130px, 36vw, 175px);
+  padding: 6px;
+}
+
+.bd-frame--cake {
+  width: clamp(120px, 28vw, 155px);
+  height: clamp(120px, 28vw, 155px);
+  padding: 6px;
+}
+
+.bd-frame--final {
+  width: clamp(160px, 46vw, 225px);
+  height: clamp(160px, 46vw, 225px);
+  padding: 8px;
+}
+
+.bd-frame--sleep {
+  width: clamp(100px, 26vw, 135px);
+  height: clamp(100px, 26vw, 135px);
+  padding: 6px;
+}
+
+.bd-frame--reason {
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius-md);
+  padding: 4px;
+}
+
+.bd-frame--reason::after,
+.bd-frame--sticker-mini::after {
+  display: none;
+}
+
+.bd-frame--sticker-mini {
+  width: clamp(48px, 12vw, 68px);
+  height: clamp(48px, 12vw, 68px);
+  border-radius: var(--radius-sm);
+  padding: 4px;
+}
+
+/* GIF Rendering: object-fit: contain ensures no character distortion or cropping */
+.bd-gif {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Captions */
+.bd-caption {
+  font-family: var(--font-alt);
+  font-size: clamp(0.92rem, 3.2vw, 1.08rem);
+  color: var(--rose-light);
+  text-align: center;
+  font-style: italic;
+  letter-spacing: 0.02em;
+  margin-top: 0.2rem;
+}
+
+.bd-caption-small {
+  font-family: var(--font-alt);
+  font-size: 0.82rem;
+  color: var(--rose-light);
+  text-align: center;
+  font-style: italic;
+  margin-top: 0.25rem;
+}
+
+/* ================================================================
+   SECTION 1 — WELCOME / SURPRISE SCREEN
+   ================================================================ */
+.section--welcome {
+  background:
+    radial-gradient(ellipse at 35% 25%, rgba(107, 30, 46, 0.5) 0%, transparent 60%),
+    radial-gradient(ellipse at 75% 75%, rgba(201, 168, 76, 0.22) 0%, transparent 55%),
+    var(--midnight);
+}
+
+.welcome__content {
+  max-width: 440px;
+  text-align: center;
+  gap: 1.25rem;
+  z-index: 2;
+}
+
+.welcome__text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.welcome__eyebrow {
+  font-family: var(--font-alt);
+  font-size: clamp(0.85rem, 3.2vw, 1.1rem);
+  color: var(--rose);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.welcome__title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.8rem, 13vw, 4.8rem);
+  color: var(--gold);
+  background: linear-gradient(135deg, #fff3d1 0%, var(--gold) 50%, #e6cc82 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.12;
+  font-weight: 700;
+  text-shadow: 0 4px 25px rgba(201, 168, 76, 0.3);
+}
+
+.welcome__heart {
+  color: var(--rose);
+  -webkit-text-fill-color: var(--rose);
+  display: inline-block;
+  margin-left: 0.15rem;
+  animation: heartbeat 1.6s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  14%      { transform: scale(1.22); }
+  28%      { transform: scale(1); }
+  42%      { transform: scale(1.12); }
+  70%      { transform: scale(1); }
+}
+
+.welcome__subtitle {
+  font-family: var(--font-alt);
+  font-size: clamp(0.98rem, 3.6vw, 1.25rem);
+  color: var(--rose-light);
+  font-style: italic;
+  margin-top: 0.15rem;
+}
+
+.welcome__hint {
+  font-size: 0.8rem;
+  color: rgba(255, 245, 245, 0.45);
+  letter-spacing: 0.1em;
+  margin-top: -0.3rem;
+}
+
+/* ── Surprise Button (Large Touch Target: >= 48px) ───────────── */
+.btn-surprise {
+  position: relative;
+  background: linear-gradient(135deg, var(--burgundy), #9c2847);
+  color: #fff4db;
+  border: 2px solid var(--gold);
+  border-radius: 60px;
+  min-height: 48px;
+  padding: 0.9rem clamp(1.8rem, 6vw, 2.6rem);
+  font-family: var(--font-serif);
+  font-size: clamp(1rem, 3.8vw, 1.15rem);
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: visible;
+  margin-top: 0.4rem;
+  box-shadow: 0 8px 25px rgba(107, 30, 46, 0.5), 0 0 18px rgba(201, 168, 76, 0.25);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-surprise:active,
+.btn-surprise:hover {
+  transform: scale(1.03);
+  box-shadow: 0 10px 30px rgba(201, 168, 76, 0.5);
+}
+
+.btn-surprise__ring {
+  position: absolute;
+  inset: -6px;
+  border-radius: 60px;
+  border: 2px solid var(--gold);
+  opacity: 0.5;
+  animation: ring-pulse 2.2s ease-out infinite;
+  pointer-events: none;
+}
+
+@keyframes ring-pulse {
+  0%   { transform: scale(1); opacity: 0.5; }
+  100% { transform: scale(1.18); opacity: 0; }
+}
+
+/* ── Falling Petals ──────────────────────────────────────────── */
+.petals-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.petal {
+  position: absolute;
+  top: -10%;
+  width: 12px;
+  height: 18px;
+  background: radial-gradient(ellipse at 50% 30%, #fbd5de, var(--rose));
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  opacity: 0;
+  animation: petal-fall linear infinite;
+}
+
+.petal:nth-child(1) { left: 10%; animation-duration: 7.5s; animation-delay: 0s; width: 9px; height: 13px; }
+.petal:nth-child(2) { left: 28%; animation-duration: 9.5s; animation-delay: 1.5s; }
+.petal:nth-child(3) { left: 48%; animation-duration: 8s;   animation-delay: 2.8s; width: 11px; }
+.petal:nth-child(4) { left: 70%; animation-duration: 10s;  animation-delay: 0.6s; }
+.petal:nth-child(5) { left: 88%; animation-duration: 8.5s; animation-delay: 3.5s; width: 10px; }
+
+@keyframes petal-fall {
+  0%   { opacity: 0; transform: translateY(-5%) rotateZ(0deg); top: -5%; }
+  12%  { opacity: 0.8; }
+  88%  { opacity: 0.6; }
+  100% { opacity: 0; transform: translateY(115vh) rotateZ(360deg); }
+}
+
+/* ================================================================
+   SECTION 2 — BIRTHDAY REVEAL (ZERO CLIPPING ON ANY PHONE)
+   ================================================================ */
+.section--reveal {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(201, 168, 76, 0.3) 0%, transparent 55%),
+    radial-gradient(ellipse at 20% 80%, rgba(107, 30, 46, 0.55) 0%, transparent 60%),
+    var(--midnight);
+}
+
+.reveal__content {
+  max-width: 520px;
+  text-align: center;
+  gap: 1.25rem;
+  z-index: 2;
+  padding: 0.25rem 0.15rem;
+}
+
+.reveal__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+.reveal__eyebrow {
+  font-family: var(--font-alt);
+  font-size: clamp(0.85rem, 3.2vw, 1.1rem);
+  color: var(--rose-light);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+
+/* "Happy Birthday, My Junior!" Heading */
+.reveal__title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 7.8vw, 3.4rem);
+  line-height: 1.22;
+  color: var(--gold);
+  background: linear-gradient(135deg, #fff3d1 0%, var(--gold) 50%, #e6cc82 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 4px 25px rgba(201, 168, 76, 0.28);
+  margin: 0.15rem 0 0.35rem;
+  word-break: break-word;
+  text-align: center;
+}
+
+.reveal__name {
+  background: linear-gradient(135deg, #ffd4df 0%, var(--rose) 50%, #fbd5de 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-style: italic;
+  display: inline-block;
+}
+
+.reveal__date {
+  font-size: clamp(0.75rem, 2.6vw, 0.9rem);
+  letter-spacing: 0.15em;
+  color: rgba(255, 245, 245, 0.65);
+  text-transform: uppercase;
+  margin-top: 0.15rem;
+}
+
+.reveal__message {
+  font-family: var(--font-alt);
+  font-size: clamp(1.05rem, 3.8vw, 1.28rem);
+  color: var(--blush);
+  line-height: 1.75;
+  max-width: 400px;
+}
+
+.reveal__message em {
+  color: var(--rose-light);
+  font-style: italic;
+}
+
+.reveal__fireworks,
+.confetti-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* ================================================================
+   SECTION 3 — OUR LITTLE FOREVER ❤️ (RELATIONSHIP TIMELINE)
+   Scrapbook aesthetic: washi-tapes, bespoke yearly palettes, 
+   Polaroid keepsake GIF frames, and emotional confessions.
+   ================================================================ */
+.section--timeline {
+  background:
+    radial-gradient(ellipse at 50% 10%, rgba(107, 30, 46, 0.45) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 90%, rgba(201, 168, 76, 0.16) 0%, transparent 55%),
+    var(--midnight);
+}
+
+.timeline__wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.timeline__header {
+  text-align: center;
+  margin-bottom: 2rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.timeline__eyebrow {
+  font-size: clamp(0.72rem, 2.5vw, 0.88rem);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--rose);
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+
+/* Beginning Date Badge — Pill Badge */
+.timeline__date-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  background: rgba(45, 10, 20, 0.75);
+  border: 1.5px solid var(--gold);
+  border-radius: 9999px;
+  padding: 0.45rem 1rem;
+  margin: 0.35rem 0 1.25rem 0;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4), 0 0 15px rgba(201, 168, 76, 0.2);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  max-width: 95%;
+  flex-wrap: wrap;
+}
+
+.timeline__date-icon {
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.timeline__date-text {
+  font-family: var(--font-serif);
+  font-size: clamp(0.68rem, 2.4vw, 0.92rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--gold-light);
+  line-height: 1.35;
+  text-align: center;
+}
+
+/* Anniversary Intro Card */
+.timeline__intro-card {
+  background: linear-gradient(135deg, rgba(42, 12, 22, 0.85), rgba(20, 6, 12, 0.92));
+  border: 1px solid rgba(232, 160, 175, 0.3);
+  border-radius: var(--radius-md);
+  padding: clamp(0.9rem, 3.2vw, 1.35rem) clamp(1rem, 3.8vw, 1.7rem);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.45);
+  width: 100%;
+  max-width: 580px;
+}
+
+.timeline__intro-text {
+  font-family: var(--font-alt);
+  font-size: clamp(0.96rem, 3.2vw, 1.25rem);
+  font-style: italic;
+  color: #fff1f4;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* Vertical Timeline Track */
+.timeline__track {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2rem, 5.5vw, 2.75rem);
+  margin-top: 1rem;
+  padding: 0.5rem 0;
+}
+
+/* Center connector spine line */
+.timeline__track::before {
+  content: '';
+  position: absolute;
+  top: 1.5rem;
+  bottom: 1.5rem;
+  left: 50%;
+  width: 2px;
+  transform: translateX(-50%);
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(201, 168, 76, 0.45) 0px,
+    rgba(201, 168, 76, 0.45) 6px,
+    transparent 6px,
+    transparent 12px
+  );
+  z-index: 0;
+}
+
+/* Scrapbook Panel Base */
+.timeline__panel {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  border-radius: 20px;
+  padding: clamp(1.5rem, 4.5vw, 2.1rem) clamp(1.1rem, 3.8vw, 1.7rem) clamp(1.25rem, 3.8vw, 1.7rem);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55), 0 0 20px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.timeline__panel:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 38px rgba(0, 0, 0, 0.65), 0 0 25px rgba(201, 168, 76, 0.2);
+}
+
+/* Scrapbook Washi Tape Header */
+.timeline__washi-tape {
+  position: absolute;
+  top: -11px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-1deg);
+  width: clamp(80px, 24vw, 110px);
+  height: 22px;
+  border-radius: 2px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+  z-index: 3;
+  opacity: 0.9;
+}
+
+/* Panel Header */
+.timeline__panel-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-bottom: 0.85rem;
+  width: 100%;
+}
+
+.timeline__year-badge {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: clamp(0.72rem, 2.4vw, 0.82rem);
+  letter-spacing: 0.08em;
+  padding: 0.2rem 0.7rem;
+  border-radius: 9999px;
+  text-transform: uppercase;
+}
+
+.timeline__panel-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.05rem, 3.6vw, 1.35rem);
+  letter-spacing: 0.03em;
+  font-weight: 700;
+  word-break: break-word;
+}
+
+.timeline__card-bd {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0.25rem 0 0.5rem 0;
+  width: 100%;
+}
+
+.timeline__message {
+  font-family: var(--font-alt);
+  font-style: italic;
+  font-size: clamp(1.02rem, 3.2vw, 1.2rem);
+  line-height: 1.6;
+  color: #fff6f8;
+  margin: 0.5rem 0 0.4rem 0;
+  padding: 0.25rem 0.5rem;
+}
+
+.timeline__message p {
+  margin: 0;
+}
+
+.timeline__deco-elements {
+  display: flex;
+  gap: 0.65rem;
+  font-size: 1.05rem;
+  opacity: 0.85;
+  margin-top: 0.35rem;
+}
+
+/* ── Yearly Color Themes ────────────────────────────────────────── */
+/* 2022: Dusty Rose (#C98B98) */
+.timeline__panel--2022 {
+  background: linear-gradient(150deg, rgba(48, 18, 28, 0.92), rgba(24, 8, 15, 0.96));
+  border: 1.5px solid rgba(201, 139, 152, 0.48);
+}
+.timeline__panel--2022 .timeline__washi-tape {
+  background: rgba(201, 139, 152, 0.75);
+}
+.timeline__panel--2022 .timeline__year-badge {
+  background: rgba(201, 139, 152, 0.25);
+  border: 1px solid #C98B98;
+  color: #ffd6df;
+}
+.timeline__panel--2022 .timeline__panel-title {
+  color: #f5b8c5;
+}
+
+/* 2023: Warm Golden Beige (#E6D7B9) */
+.timeline__panel--2023 {
+  background: linear-gradient(150deg, rgba(46, 32, 16, 0.92), rgba(22, 14, 8, 0.96));
+  border: 1.5px solid rgba(230, 215, 185, 0.48);
+}
+.timeline__panel--2023 .timeline__washi-tape {
+  background: rgba(230, 215, 185, 0.75);
+}
+.timeline__panel--2023 .timeline__year-badge {
+  background: rgba(230, 215, 185, 0.25);
+  border: 1px solid #E6D7B9;
+  color: #fff3dc;
+}
+.timeline__panel--2023 .timeline__panel-title {
+  color: #f2e2c4;
+}
+
+/* 2024: Soft Teal (#6B9080) */
+.timeline__panel--2024 {
+  background: linear-gradient(150deg, rgba(16, 38, 32, 0.92), rgba(8, 20, 18, 0.96));
+  border: 1.5px solid rgba(107, 144, 128, 0.48);
+}
+.timeline__panel--2024 .timeline__washi-tape {
+  background: rgba(107, 144, 128, 0.75);
+}
+.timeline__panel--2024 .timeline__year-badge {
+  background: rgba(107, 144, 128, 0.25);
+  border: 1px solid #6B9080;
+  color: #d0f2e6;
+}
+.timeline__panel--2024 .timeline__panel-title {
+  color: #9fd0bd;
+}
+
+/* 2025: Muted Lavender (#9D8189) */
+.timeline__panel--2025 {
+  background: linear-gradient(150deg, rgba(38, 22, 34, 0.92), rgba(18, 10, 18, 0.96));
+  border: 1.5px solid rgba(157, 129, 137, 0.48);
+}
+.timeline__panel--2025 .timeline__washi-tape {
+  background: rgba(157, 129, 137, 0.75);
+}
+.timeline__panel--2025 .timeline__year-badge {
+  background: rgba(157, 129, 137, 0.25);
+  border: 1px solid #9D8189;
+  color: #fae9ed;
+}
+.timeline__panel--2025 .timeline__panel-title {
+  color: #d8b8c2;
+}
+
+/* 2026: Warm Coral (#D97D64) */
+.timeline__panel--2026 {
+  background: linear-gradient(150deg, rgba(50, 20, 14, 0.92), rgba(24, 8, 6, 0.96));
+  border: 1.5px solid rgba(217, 125, 100, 0.52);
+}
+.timeline__panel--2026 .timeline__washi-tape {
+  background: rgba(217, 125, 100, 0.75);
+}
+.timeline__panel--2026 .timeline__year-badge {
+  background: rgba(217, 125, 100, 0.25);
+  border: 1px solid #D97D64;
+  color: #ffd6cc;
+}
+.timeline__panel--2026 .timeline__panel-title {
+  color: #f69e88;
+}
+
+/* ── Things I've Never Told You Card ────────────────────────────── */
+.timeline__confession-card {
+  margin-top: 2.25rem;
+  width: 100%;
+  background: linear-gradient(145deg, rgba(55, 12, 28, 0.92), rgba(22, 5, 12, 0.96));
+  border: 1.5px solid rgba(201, 168, 76, 0.5);
+  border-radius: 22px;
+  padding: clamp(1.25rem, 4.5vw, 2rem) clamp(1.1rem, 4vw, 1.8rem);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6), 0 0 25px rgba(201, 168, 76, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.timeline__confession-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.timeline__confession-icon {
+  font-size: 1.35rem;
+}
+
+.timeline__confession-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.1rem, 3.8vw, 1.45rem);
+  color: var(--gold);
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+
+.timeline__confession-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.25rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.timeline__confession-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  font-family: var(--font-alt);
+  font-size: clamp(1rem, 3.2vw, 1.15rem);
+  color: #ffeef2;
+  line-height: 1.5;
+}
+
+.confession-emoji {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.confession-text {
+  flex: 1;
+}
+
+.timeline__confession-highlight {
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px dashed rgba(201, 168, 76, 0.35);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.75rem;
+}
+
+.timeline__confession-quote {
+  font-family: var(--font-alt);
+  font-size: clamp(1.05rem, 3.5vw, 1.25rem);
+  font-style: italic;
+  color: var(--gold-light);
+  font-weight: 600;
+  line-height: 1.6;
+  max-width: 500px;
+}
+
+/* ── Secret Teaser & Nav ────────────────────────────────────────── */
+.timeline__teaser {
+  margin-top: 1.5rem;
+  background: rgba(201, 168, 76, 0.12);
+  border: 1px solid rgba(201, 168, 76, 0.4);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1.25rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  width: 100%;
+  max-width: 480px;
+}
+
+.timeline__teaser-text {
+  font-family: var(--font-alt);
+  font-size: clamp(0.92rem, 3vw, 1.05rem);
+  color: var(--gold-light);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.timeline__teaser-arrow {
+  font-size: 1.2rem;
+  color: var(--gold);
+  animation: teaser-bounce 1.6s infinite ease-in-out;
+}
+
+@keyframes teaser-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(5px); }
+}
+
+.timeline__nav {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+/* ================================================================
+   SECTION 4 — LOVE LETTER (MOBILE-OPTIMIZED TYPOGRAPHY)
+   ================================================================ */
+.section--letter {
+  background:
+    radial-gradient(ellipse at 85% 15%, rgba(107, 30, 46, 0.45) 0%, transparent 55%),
+    radial-gradient(ellipse at 15% 85%, rgba(201, 168, 76, 0.18) 0%, transparent 50%),
+    var(--deep-night);
+}
+
+.letter__wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 620px;
+}
+
+/* Mobile companion sticker: placed ABOVE letter on mobile/tablet */
+.letter__bd-sticker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  margin-bottom: 1.15rem;
+}
+
+@media (min-width: 960px) {
+  .letter__bd-sticker {
+    position: absolute;
+    right: -130px;
+    top: 30px;
+    margin-bottom: 0;
+    z-index: 5;
+  }
+}
+
+.letter__card {
+  background: linear-gradient(145deg, rgba(28, 16, 23, 0.92), rgba(16, 12, 18, 0.97));
+  border: 1.5px solid rgba(201, 168, 76, 0.35);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.4rem, 5vw, 2.75rem) clamp(1.1rem, 4vw, 2.4rem);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  width: 100%;
+  position: relative;
+  box-shadow:
+    0 14px 45px rgba(0, 0, 0, 0.65),
+    0 0 30px rgba(107, 30, 46, 0.35),
+    inset 0 1px 0 rgba(201, 168, 76, 0.25);
+}
+
+.letter__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(201, 168, 76, 0.22);
+  padding-bottom: 0.9rem;
+  margin-bottom: 1.35rem;
+}
+
+.letter__salutation {
+  font-family: var(--font-serif);
+  font-size: clamp(1.3rem, 4.8vw, 1.85rem);
+  color: var(--gold);
+  font-style: italic;
+  letter-spacing: 0.02em;
+}
+
+.letter__heart-flourish {
+  color: var(--rose);
+  font-size: 1.15rem;
+  animation: heartbeat 2s ease-in-out infinite;
+}
+
+/* Comfortable mobile reading: 16-19px, line-height 1.8-1.95 */
+.letter__body {
+  font-family: var(--font-alt);
+  font-size: clamp(1.02rem, 3.8vw, 1.22rem);
+  line-height: 1.88;
+  color: #fff8f9;
+  letter-spacing: 0.015em;
+}
+
+.letter__body p {
+  margin-bottom: 1.25rem;
+}
+
+.letter__body p:last-child {
+  margin-bottom: 0;
+}
+
+.letter__body em {
+  color: #ffd6e0;
+  font-style: italic;
+  font-weight: 500;
+}
+
+.letter__footer {
+  margin-top: 1.5rem;
+  padding-top: 1.15rem;
+  border-top: 1px solid rgba(201, 168, 76, 0.22);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+
+.letter__sign {
+  font-family: var(--font-alt);
+  font-size: 1.05rem;
+  color: var(--rose-light);
+  font-style: italic;
+}
+
+.letter__name {
+  font-family: var(--font-serif);
+  font-size: clamp(1.25rem, 4vw, 1.55rem);
+  color: var(--gold);
+  font-style: italic;
+  margin-top: 0.2rem;
+}
+
+.letter__stamp {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border: 1px solid rgba(201, 168, 76, 0.4);
+  border-radius: 50px;
+  padding: 0.35rem 0.75rem;
+  background: rgba(107, 30, 46, 0.35);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  color: var(--gold-light);
+  font-family: var(--font-body);
+}
+
+/* ================================================================
+   SECTION 5 — REASONS I LOVE YOU (HARMONIOUS 6 CARDS)
+   ================================================================ */
+.section--reasons {
+  background:
+    radial-gradient(ellipse at 85% 30%, rgba(201, 168, 76, 0.22) 0%, transparent 55%),
+    radial-gradient(ellipse at 20% 70%, rgba(107, 30, 46, 0.45) 0%, transparent 55%),
+    var(--deep-night);
+}
+
+.reasons__wrapper {
+  max-width: 740px;
+}
+
+.reasons__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.85rem;
+  width: 100%;
+}
+
+@media (max-width: 360px) {
+  .reasons__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 640px) {
+  .reasons__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+.reasons__card {
+  background: linear-gradient(145deg, rgba(107, 30, 46, 0.28), rgba(255, 245, 245, 0.05));
+  border: 1.5px solid rgba(201, 168, 76, 0.25);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 0.9rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.reasons__badge-container {
+  height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reasons__emoji-badge {
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, rgba(107, 30, 46, 0.55), rgba(201, 168, 76, 0.18));
+  border: 1.5px solid rgba(201, 168, 76, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.1rem;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+.reasons__number {
+  font-family: var(--font-alt);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: var(--gold-light);
+  font-weight: 600;
+  opacity: 0.85;
+}
+
+.reasons__title {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.reasons__text {
+  font-family: var(--font-alt);
+  font-size: 0.98rem;
+  color: var(--rose-light);
+  line-height: 1.6;
+}
+
+/* ================================================================
+   SECTION 6 — BIRTHDAY CAKE (MOBILE-STACKED WITH PARTY DANCE)
+   ================================================================ */
+.section--cake {
+  background:
+    radial-gradient(ellipse at 50% 50%, rgba(107, 30, 46, 0.55) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 80%, rgba(201, 168, 76, 0.2) 0%, transparent 55%),
+    var(--midnight);
+}
+
+.cake__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.35rem;
+  width: 100%;
+  max-width: 840px;
+  z-index: 2;
+}
+
+@media (min-width: 768px) {
+  .cake__content {
+    flex-direction: row;
+    gap: 2.5rem;
+  }
+}
+
+/* On mobile, party dance animation is placed right above the cake! */
+.cake__left {
+  display: flex;
+  order: -1;
+}
+
+.cake__right {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .cake__left { order: 0; }
+  .cake__right { display: flex; }
+}
+
+.cake__center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+}
+
+/* Cake SVG and Flames */
+.cake__svg-wrapper {
+  position: relative;
+  margin-bottom: 0.35rem;
+}
+
+.cake__candles {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-bottom: 4px;
+}
+
+.cake__flame {
+  width: 10px;
+  height: 18px;
+  background: linear-gradient(to top, #ff9800, #fff176, #fff);
+  border-radius: 50% 50% 30% 30%;
+  animation: flicker 0.8s ease-in-out infinite alternate;
+  transform-origin: bottom center;
+  filter: drop-shadow(0 0 10px #ff9800);
+}
+
+.cake__flame:nth-child(2) { animation-delay: 0.25s; }
+.cake__flame:nth-child(3) { animation-delay: 0.5s; }
+
+@keyframes flicker {
+  0%   { transform: scaleX(0.9) scaleY(1) skewX(-3deg); }
+  100% { transform: scaleX(1.1) scaleY(0.95) skewX(3deg); }
+}
+
+.cake__body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cake__tier {
+  border-radius: 8px 8px 0 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.cake__tier--top {
+  width: 90px;
+  height: 38px;
+  background: linear-gradient(135deg, var(--rose), var(--burgundy));
+  border-radius: 10px 10px 0 0;
+}
+
+.cake__tier--mid {
+  width: 125px;
+  height: 42px;
+  background: linear-gradient(135deg, var(--burgundy), #8a2540);
+}
+
+.cake__tier--bot {
+  width: 165px;
+  height: 48px;
+  background: linear-gradient(135deg, #5a1625, var(--burgundy));
+  border-radius: 0 0 8px 8px;
+}
+
+.cake__frosting {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background: repeating-linear-gradient(90deg, var(--rose-light) 0px, var(--rose-light) 12px, transparent 12px, transparent 24px);
+  border-radius: 4px;
+}
+
+.cake__title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.4rem, 4.8vw, 2.1rem);
+  color: var(--gold);
+}
+
+.cake__subtitle {
+  font-family: var(--font-alt);
+  font-size: clamp(0.95rem, 3.4vw, 1.15rem);
+  color: var(--rose-light);
+  max-width: 280px;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+.btn-blow {
+  background: linear-gradient(135deg, var(--gold), #a8842a);
+  color: var(--midnight);
+  border: none;
+  border-radius: 50px;
+  min-height: 48px;
+  padding: 0.85rem 2rem;
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  box-shadow: 0 8px 25px rgba(201, 168, 76, 0.4);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-blow.blown {
+  background: linear-gradient(135deg, #3a3a3a, #222);
+  color: rgba(255, 255, 255, 0.5);
+  cursor: default;
+  pointer-events: none;
+  box-shadow: none;
+}
+
+/* ── Cake Wish Message (Step 1) ────────────────────────────────── */
+.cake__wish-msg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.5rem;
+  background: linear-gradient(135deg, rgba(55, 10, 25, 0.95), rgba(30, 5, 15, 0.98));
+  border: 1.5px solid rgba(232, 160, 175, 0.5);
+  border-radius: var(--radius-md);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.5), 0 0 20px rgba(232, 160, 175, 0.2);
+  /* Hidden by default */
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transform: translateY(-8px) scale(0.96);
+  transition: opacity 0.45s ease, max-height 0.45s ease, transform 0.45s ease;
+  pointer-events: none;
+}
+
+.cake__wish-msg.visible {
+  opacity: 1;
+  max-height: 200px;
+  transform: translateY(0) scale(1);
+}
+
+.cake__wish-emoji {
+  font-size: 1.6rem;
+  animation: wish-pulse 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes wish-pulse {
+  0%   { transform: scale(1);    opacity: 0.85; }
+  100% { transform: scale(1.18); opacity: 1; }
+}
+
+.cake__wish-text {
+  font-family: var(--font-alt);
+  font-size: clamp(1rem, 3.5vw, 1.2rem);
+  font-style: italic;
+  color: var(--rose-light);
+  text-align: center;
+  line-height: 1.55;
+}
+
+/* ── Puff Smoke Container (Step 2) ────────────────────────────── */
+.cake__puff-container {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 50px;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.cake__puff {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, rgba(255,255,255,0.75), rgba(220,220,220,0.3) 70%, transparent);
+  animation: puff-rise var(--dur, 1.2s) ease-out forwards;
+}
+
+@keyframes puff-rise {
+  0%   { opacity: 0.9; transform: translateY(0)    scale(0.6); }
+  60%  { opacity: 0.5; transform: translateY(-28px) scale(1.2); }
+  100% { opacity: 0;   transform: translateY(-55px) scale(1.6); }
+}
+
+/* ── Birthday Celebration Card (Step 4) ────────────────────────── */
+.cake__celebration {
+  width: 100%;
+  max-width: 360px;
+  padding: clamp(1rem, 4vw, 1.5rem) clamp(1.1rem, 4.5vw, 1.8rem);
+  background: linear-gradient(145deg, rgba(75, 15, 35, 0.95), rgba(25, 5, 12, 0.98));
+  border: 1.5px solid rgba(201, 168, 76, 0.6);
+  border-radius: 22px;
+  box-shadow: 0 12px 38px rgba(0, 0, 0, 0.6), 0 0 30px rgba(201, 168, 76, 0.2);
+  text-align: center;
+  animation: celebration-enter 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes celebration-enter {
+  from { opacity: 0; transform: scale(0.82) translateY(12px); }
+  to   { opacity: 1; transform: scale(1)    translateY(0); }
+}
+
+.cake__celebration-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.25rem, 4.5vw, 1.65rem);
+  color: var(--gold);
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+  line-height: 1.3;
+}
+
+.cake__celebration-sub {
+  font-family: var(--font-alt);
+  font-size: clamp(0.95rem, 3.4vw, 1.15rem);
+  color: var(--rose-light);
+  font-style: italic;
+  line-height: 1.65;
+}
+
+.cake__music-notice {
+  margin-top: 0.85rem;
+  padding: 0.55rem 1rem;
+  background: rgba(201, 168, 76, 0.12);
+  border: 1px dashed rgba(201, 168, 76, 0.4);
+  border-radius: var(--radius-sm);
+  font-size: clamp(0.78rem, 2.6vw, 0.9rem);
+  color: var(--gold-light);
+  line-height: 1.5;
+}
+
+.cake__music-notice code {
+  font-family: monospace;
+  color: var(--rose-light);
+  font-size: 0.85em;
+}
+
+/* ── Music-no-source notice on the floating button ─────────────── */
+.music-toggle.no-source::after {
+  content: '?';
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 14px;
+  height: 14px;
+  background: rgba(201, 168, 76, 0.9);
+  border-radius: 50%;
+  font-size: 9px;
+  color: #111;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 14px;
+}
+
+.music-toggle {
+  position: relative; /* required for ::after badge */
+}
+
+/* ================================================================
+   SECTION 7 — SECRET GIFT BOX & FINAL SURPRISE
+   ================================================================ */
+.section--final {
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(107, 30, 46, 0.65) 0%, transparent 55%),
+    radial-gradient(ellipse at 70% 80%, rgba(201, 168, 76, 0.3) 0%, transparent 55%),
+    var(--midnight);
+}
+
+.final__content {
+  max-width: 680px;
+  gap: 1.5rem;
+  text-align: center;
+  z-index: 2;
+}
+
+/* ── Secret Gift Box Element ─────────────────────────────────── */
+.gift-box-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.gift-box-wrapper--opened {
+  display: none !important;
+}
+
+.gift-box {
+  position: relative;
+  width: 130px;
+  height: 120px;
+  cursor: pointer;
+  animation: gift-float 2.5s ease-in-out infinite;
+}
+
+@keyframes gift-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%      { transform: translateY(-10px) rotate(2deg); }
+}
+
+.gift-box__lid {
+  position: absolute;
+  top: 0;
+  left: -5px;
+  right: -5px;
+  height: 35px;
+  background: linear-gradient(135deg, var(--burgundy), #962846);
+  border: 1.5px solid var(--gold);
+  border-radius: 8px 8px 4px 4px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  z-index: 3;
+  transition: transform 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.gift-box__bow {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2.2rem;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));
+}
+
+.gift-box__base {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 90px;
+  background: linear-gradient(135deg, #5a1727, var(--burgundy));
+  border: 1.5px solid var(--gold);
+  border-radius: 4px 4px 12px 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 25px rgba(201, 168, 76, 0.25);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gift-box__ribbon-v {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 22px;
+  height: 100%;
+  background: linear-gradient(to right, #ffd875, var(--gold), #e0be63);
+  box-shadow: 0 0 10px rgba(201, 168, 76, 0.5);
+}
+
+.gift-box__ribbon-h {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 22px;
+  width: 100%;
+  background: linear-gradient(to bottom, #ffd875, var(--gold), #e0be63);
+  box-shadow: 0 0 10px rgba(201, 168, 76, 0.5);
+}
+
+.gift-box__sparkle {
+  position: absolute;
+  font-size: 1.25rem;
+  animation: heartbeat 1.5s ease-in-out infinite;
+  z-index: 2;
+}
+
+.gift-box--opened .gift-box__lid {
+  transform: translateY(-40px) rotate(-16deg);
+}
+
+.gift-hint {
+  font-family: var(--font-alt);
+  font-size: 0.92rem;
+  color: var(--rose-light);
+  font-style: italic;
+  letter-spacing: 0.05em;
+}
+
+/* ── Revealed Final Card ─────────────────────────────────────── */
+.final__revealed-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.4rem;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.final__revealed-card.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (min-width: 860px) {
+  .final__revealed-card {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    text-align: left;
+  }
+}
+
+.final__stars {
+  font-size: 1.1rem;
+  letter-spacing: 0.3em;
+  margin-bottom: 0.4rem;
+}
+
+.final__title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.9rem, 6vw, 3rem);
+  color: var(--gold);
+  background: linear-gradient(135deg, #fff2cc 0%, var(--gold) 50%, #e6cc82 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+}
+
+.final__message {
+  font-family: var(--font-alt);
+  font-size: clamp(1.05rem, 3.8vw, 1.28rem);
+  line-height: 1.85;
+  color: #fff6f7;
+  max-width: 480px;
+}
+
+.final__message p {
+  margin-bottom: 0.75rem;
+}
+
+.final__signature {
+  font-family: var(--font-serif);
+  color: var(--rose-light);
+  font-style: italic;
+  margin-top: 1rem;
+  line-height: 1.7;
+}
+
+.final__signature-name {
+  font-size: 1.45rem;
+  color: var(--gold);
+}
+
+.final__hearts {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-top: 0.75rem;
+}
+
+.heart-float {
+  display: inline-block;
+  animation: float-up 3s ease-in-out infinite;
+  font-size: 1.25rem;
+}
+
+.heart-float:nth-child(1) { animation-delay: 0s; }
+.heart-float:nth-child(2) { animation-delay: 0.4s; }
+.heart-float:nth-child(3) { animation-delay: 0.8s; }
+.heart-float:nth-child(4) { animation-delay: 1.2s; }
+.heart-float:nth-child(5) { animation-delay: 1.6s; }
+
+@keyframes float-up {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50%      { transform: translateY(-12px); opacity: 0.7; }
+}
+
+.final__sleep-sticker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  margin-top: 0.75rem;
+}
+
+/* ================================================================
+   NAVIGATION BUTTONS (TOUCH TARGETS >= 48px)
+   ================================================================ */
+.btn-next,
+.btn-restart {
+  background: rgba(107, 30, 46, 0.45);
+  color: #fff2f5;
+  border: 1.5px solid rgba(201, 168, 76, 0.45);
+  border-radius: 50px;
+  min-height: 48px;
+  padding: 0.85rem clamp(1.8rem, 6vw, 2.5rem);
+  font-family: var(--font-serif);
+  font-size: clamp(0.98rem, 3.5vw, 1.12rem);
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  transition: all 0.25s ease;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-next:active,
+.btn-restart:active,
+.btn-next:hover,
+.btn-restart:hover {
+  background: linear-gradient(135deg, var(--burgundy), #9c2847);
+  border-color: var(--gold);
+  color: var(--white);
+  box-shadow: 0 8px 26px rgba(201, 168, 76, 0.4);
+}
+
+.reveal__nav,
+.letter__nav,
+.reasons__nav,
+.cake__nav,
+.final__restart {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+  width: 100%;
+  z-index: 5;
+}
+
+/* ── Birthday Cake Navigation & Surprise Lock Styles ─────────── */
+.cake__nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Subtly locked Final Surprise button before candles are blown */
+.btn-next--locked {
+  opacity: 0.65;
+  background: rgba(45, 14, 24, 0.65) !important;
+  border-color: rgba(201, 168, 76, 0.28) !important;
+  color: rgba(255, 242, 245, 0.72) !important;
+  cursor: not-allowed !important;
+  box-shadow: none !important;
+  transition: all 0.3s ease;
+}
+
+.btn-next--locked:hover,
+.btn-next--locked:active {
+  background: rgba(60, 18, 30, 0.75) !important;
+  border-color: rgba(201, 168, 76, 0.4) !important;
+  color: rgba(255, 242, 245, 0.85) !important;
+  box-shadow: 0 0 14px rgba(107, 30, 46, 0.35) !important;
+  transform: none !important;
+}
+
+.btn-next--locked.shake {
+  animation: lock-nudge 0.4s ease-in-out;
+}
+
+@keyframes lock-nudge {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+
+.btn-lock-icon {
+  margin-right: 0.45rem;
+  font-size: 0.95em;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Glowing unlocked Final Surprise button after candles are blown */
+.btn-next--unlocked {
+  background: linear-gradient(135deg, var(--burgundy), #9c2847) !important;
+  border-color: var(--gold) !important;
+  color: #fff !important;
+  box-shadow: 0 8px 28px rgba(201, 168, 76, 0.55), 0 0 20px rgba(232, 160, 175, 0.35) !important;
+  animation: unlock-heartbeat 2s ease-in-out infinite !important;
+  cursor: pointer !important;
+  opacity: 1 !important;
+}
+
+@keyframes unlock-heartbeat {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 8px 26px rgba(201, 168, 76, 0.4), 0 0 15px rgba(232, 160, 175, 0.3);
+  }
+  50% {
+    transform: scale(1.03);
+    box-shadow: 0 12px 34px rgba(201, 168, 76, 0.7), 0 0 26px rgba(232, 160, 175, 0.6);
+  }
+}
+
+/* Gentle hint shown when tapping Final Surprise while locked */
+.cake__lock-hint {
+  background: linear-gradient(135deg, rgba(65, 15, 28, 0.96), rgba(35, 8, 16, 0.98));
+  border: 1.5px solid rgba(232, 160, 175, 0.7);
+  color: var(--rose-light);
+  font-family: var(--font-alt);
+  font-size: clamp(0.88rem, 3.2vw, 1.02rem);
+  font-style: italic;
+  padding: 0.55rem 1.15rem;
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5), 0 0 16px rgba(232, 160, 175, 0.25);
+  margin-bottom: 0.75rem;
+  text-align: center;
+  max-width: 320px;
+  line-height: 1.45;
+  animation: hint-pop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes hint-pop {
+  from { opacity: 0; transform: translateY(-6px) scale(0.92); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Announcement shown once candles are blown and Final Surprise unlocks */
+.cake__unlocked-msg {
+  background: linear-gradient(135deg, rgba(75, 18, 35, 0.96), rgba(40, 10, 20, 0.98));
+  border: 1.5px solid rgba(201, 168, 76, 0.75);
+  color: var(--gold-light);
+  font-family: var(--font-alt);
+  font-size: clamp(0.9rem, 3.3vw, 1.05rem);
+  font-style: italic;
+  padding: 0.6rem 1.25rem;
+  border-radius: 22px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 22px rgba(201, 168, 76, 0.35);
+  margin-bottom: 0.85rem;
+  text-align: center;
+  max-width: 340px;
+  line-height: 1.45;
+  animation: hint-pop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* ================================================================
+   PROGRESS NAVIGATION (TOUCH-FRIENDLY HIT AREA)
+   ================================================================ */
+.progress-nav {
+  position: fixed;
+  right: max(0.5rem, env(safe-area-inset-right));
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 100;
+}
+
+.progress-dot {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(232, 160, 175, 0.5);
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  margin: 6px 0;
+  transition: all 0.25s ease;
+}
+
+/* Expanded invisible touch hit area (44px) for mobile fingers */
+.progress-dot::before {
+  content: '';
+  position: absolute;
+  inset: -14px -16px;
+  border-radius: 50%;
+}
+
+.progress-dot.active {
+  background: var(--rose);
+  border-color: var(--gold);
+  box-shadow: 0 0 12px var(--rose);
+  transform: scale(1.35);
+}
+
+/* ================================================================
+   MUSIC TOGGLE (SAFE AREA POSITIONED, TOUCH >= 48px)
+   ================================================================ */
+.music-toggle {
+  position: fixed;
+  bottom: max(1.25rem, env(safe-area-inset-bottom));
+  left: max(1.25rem, env(safe-area-inset-left));
+  z-index: 100;
+  background: rgba(107, 30, 46, 0.85);
+  border: 1.5px solid rgba(201, 168, 76, 0.45);
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 1.25rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+  transition: all 0.25s ease;
+}
+
+.music-toggle:active,
+.music-toggle:hover {
+  background: rgba(107, 30, 46, 0.98);
+  border-color: var(--gold);
+  transform: scale(1.08);
+}
+
+.music-toggle.playing {
+  background: rgba(201, 168, 76, 0.35);
+  border-color: var(--gold);
+  box-shadow: 0 0 20px rgba(201, 168, 76, 0.55);
+}
+
+/* ================================================================
+   UTILITY
+   ================================================================ */
+.visually-hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}

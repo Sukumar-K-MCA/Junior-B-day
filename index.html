@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0a0a0f" />
+  <meta name="description" content="A romantic birthday surprise website for Junior, filled with cute Bubu & Dudu memories." />
+  <title>Happy Birthday Junior 🎂💖</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ============================================================
+       SECTION 1 — WELCOME / SURPRISE SCREEN
+  ============================================================ -->
+  <section id="section-welcome" class="section section--welcome active">
+    <div class="welcome__bg-particles" aria-hidden="true"></div>
+
+    <div class="welcome__content">
+      <!-- Bubu & Dudu animated greeting pair -->
+      <div class="bubu-dudu-pair bubu-dudu-pair--welcome" aria-label="Bubu and Dudu — our couple characters">
+        <div class="bd-frame bd-frame--welcome">
+          <img
+            src="assets/images/bubu-dudu/bubu-dudu-welcome-running.gif"
+            alt="Bubu and Dudu running together excitedly to greet you"
+            class="bd-gif bd-gif--welcome"
+            loading="eager"
+            onerror="this.src='assets/images/bubu-dudu/placeholder.svg'"
+          />
+        </div>
+        <p class="bd-caption">Bubu &amp; Dudu are SO excited to see you! 🐾</p>
+      </div>
+
+      <div class="welcome__text">
+        <p class="welcome__eyebrow">A Special Message for</p>
+        <h1 class="welcome__title">Junior<span class="welcome__heart">♥</span></h1>
+        <p class="welcome__subtitle">Your birthday surprise is waiting…</p>
+      </div>
+
+      <button id="btn-surprise" class="btn-surprise" aria-label="Reveal birthday surprise">
+        <span class="btn-surprise__inner">Open Your Surprise 🎁</span>
+        <span class="btn-surprise__ring" aria-hidden="true"></span>
+      </button>
+
+      <p class="welcome__hint">tap the button to begin ✨</p>
+    </div>
+
+    <!-- Floating petals -->
+    <div class="petals-container" aria-hidden="true">
+      <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+      <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+      <div class="petal"></div><div class="petal"></div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SECTION 2 — BIRTHDAY REVEAL
+  ============================================================ -->
+  <section id="section-reveal" class="section section--reveal hidden">
+    <div class="reveal__fireworks" aria-hidden="true"></div>
+
+    <div class="reveal__content">
+      <div class="reveal__header">
+        <p class="reveal__eyebrow">Today is the most special day because</p>
+        <h2 class="reveal__title">Happy Birthday,<br /><span class="reveal__name">My Junior</span>! 🎂</h2>
+        <p class="reveal__date">October 29 · Your Day · Forever Remembered</p>
+      </div>
+
+      <!-- Romantic hug animation in keepsake frame -->
+      <div class="bubu-dudu-pair bubu-dudu-pair--reveal">
+        <div class="bd-frame bd-frame--reveal">
+          <img
+            src="assets/images/bubu-dudu/bubu-dudu-i-love-you-hug.gif"
+            alt="Bubu and Dudu hugging with love hearts — just like us"
+            class="bd-gif bd-gif--reveal"
+            loading="lazy"
+            onerror="this.src='assets/images/bubu-dudu/placeholder.svg'"
+          />
+        </div>
+        <p class="bd-caption">This is us every day 🥰</p>
+      </div>
+
+      <div class="reveal__message">
+        <p>You make every day brighter just by existing. 🌸<br />Today the whole universe celebrates <em>you</em>.</p>
+      </div>
+
+      <div class="reveal__nav">
+        <button class="btn-next" data-target="section-timeline">Our Little Forever ❤️</button>
+      </div>
+    </div>
+
+    <div class="confetti-container" aria-hidden="true"></div>
+  </section>
+
+
+  <!-- ============================================================
+       SECTION 3 — OUR LITTLE FOREVER ❤️ (RELATIONSHIP TIMELINE)
+  ============================================================ -->
+  <section id="section-timeline" class="section section--timeline hidden">
+    <div class="timeline__wrapper">
+
+      <header class="timeline__header">
+        <p class="timeline__eyebrow">A Journey of Four Beautiful Years</p>
+        <h2 class="section-title">OUR LITTLE FOREVER ❤️</h2>
+        <p class="section-subtitle">From 8 August 2022 to today, every chapter has been ours.</p>
+        
+        <div class="timeline__date-badge" aria-label="Beginning date">
+          <span class="timeline__date-icon">🗓️</span>
+          <span class="timeline__date-text">08 AUGUST 2022 — THE BEGINNING OF US ❤️</span>
+        </div>
+
+        <div class="timeline__intro-card">
+          <p class="timeline__intro-text">
+            Happy 4th Anniversary of our journey, Junior! 🥹❤️<br />
+            I hope we have many more years together.
+          </p>
+        </div>
+      </header>
+
+      <!-- Vertical Timeline Track & Scrapbook Panels -->
+      <div class="timeline__track">
+
+        <!-- 2022 — THE BEGINNING 🌸 -->
+        <article class="timeline__panel timeline__panel--2022" data-year="2022">
+          <div class="timeline__washi-tape" aria-hidden="true"></div>
+          <div class="timeline__panel-header">
+            <span class="timeline__year-badge">2022</span>
+            <h3 class="timeline__panel-title">THE BEGINNING 🌸</h3>
+          </div>
+          <div class="timeline__card-bd">
+            <div class="bd-frame bd-frame--timeline">
+              <img
+                src="assets/images/bubu-dudu/bubu-dudu-kissing-sweet.gif"
+                alt="Dudu gently kissing Bubu at the beginning of their journey"
+                class="bd-gif"
+                loading="lazy"
+                onerror="this.src='assets/images/bubu-dudu/placeholder.svg'"
+              />
+            </div>
+            <p class="bd-caption-small">The day our forever started 🐾💕</p>
+          </div>
+          <blockquote class="timeline__message">
+            <p>"The day I proposed to you..."</p>
+          </blockquote>
+          <div class="timeline__deco-elements" aria-hidden="true">
+            <span>🌸</span><span>✨</span><span>💖</span>
+          </div>
+        </article>
+
+        <!-- 2023 — LEARNING EACH OTHER 💗 -->
+        <article class="timeline__panel timeline__panel--2023" data-year="2023">
+          <div class="timeline__washi-tape" aria-hidden="true"></div>
+          <div class="timeline__panel-header">
+            <span class="timeline__year-badge">2023</span>
+            <h3 class="timeline__panel-title">LEARNING EACH OTHER 💗</h3>
+          </div>
+          <div class="timeline__card-bd">
+            <div class="bd-frame bd-frame--timeline">
+              <img
+                src="assets/images/bubu-dudu/bubu-dudu-eating-together.gif"
+                alt="Bubu and Dudu sitting together sharing warm moments and meals"
+                class="bd-gif"
+                loading="lazy"
+                onerror="this.src='assets/images/bubu-dudu/placeholder.svg'"
+              />
+            </div>
+            <p class="bd-caption-small">Learning and growing side by side 🍲✨</p>
+          </div>
+          <blockquote class="timeline__message">
+            <p>"The year we discovered that loving someone isn't always easy..."</p>
+          </blockquote>
+          <div class="timeline__deco-elements" aria-hidden="true">
+            <span>💗</span><span>🌟</span><span>📖</span>
+          </div>
+        </article>
+
+        <!-- 2024 — EVERYTHING WE WENT THROUGH 🫂 -->
+        <article class="timeline__panel timeline__panel--2024" data-year="2024">
+          <div class="timeline__washi-tape" aria-hidden="true"></div>
+          <div class="timeline__panel-header">
+            <span class="timeline__year-badge">2024</span>
+            <h3 class="timeline__panel-title">EVERYTHING WE WENT THROUGH 🫂</h3>
+          </div>
+          <div class="timeline__card-bd">
+            <div class="bd-frame bd-frame--timeline">
+              <img
+                src="assets/images/bubu-dudu/bubu-dudu-bed-cuddles.gif"
+                alt="Dudu comforting and cuddling Bubu through every hardship"
+                class="bd-gif"
+                loading="lazy"
+                onerror="this.src='assets/images/bubu-dudu/placeholder.svg'"
+              />
+            </div>
+            <p class="bd-caption-small">Always holding onto each other 🫂🌧️🌈</p>
+          </div>
+          <blockquote class="timeline__message">
+            <p>"Fights, happiness, tears, laughter... somehow, still us."</p>
+          </blockquote>
+          <div class="timeline__deco-elements" aria-hidden="true">
+            <span>🫂</span><span>✨</span><span>🤍</span>
+          </div>
+        </article>
+
+        <!-- 2025 — GROWING TOGETHER 🌙 -->
+        <article class="timeline__panel timeline__panel--2025" data-year="2025">
+          <div class="timeline__washi-tape" aria-hidden="true"></div>
+          <div class="timeline__panel-header">
+            <span class="timeline__year-badge">2025</span>
+            <h3 class="timeline__panel-title">GROWING TOGETHER 🌙</h3>
+          </div>
+          <div class="timeline__card-bd">
+            <div class="bd-frame bd-frame--timeline">
+              <img
+                src="assets/images/bubu-dudu/bubu-sleeping-dudu-carry.gif"
+                alt="Dudu carrying sleepy Bubu gently beneath the night stars"
+                class="bd-gif"
+                loading="lazy"
+                onerror="this.src='assets/images/bubu-dudu/placeholder.svg'"
+              />
+            </div>
+            <p class="bd-caption-small">Choosing you under every sky 🌙⭐</p>
+          </div>
+          <blockquote class="timeline__message">
+            <p>"We weren't perfect, but we kept choosing each other."</p>
+          </blockquote>
+          <div class="timeline__deco-elements" aria-hidden="true">
+            <span>🌙</span><span>⭐</span><span>💫</span>
+          </div>
+        </article>
+
+        <!-- 2026 — TODAY ❤️ -->
+        <article class="timeline__panel timeline__panel--2026" data-year="2026">
+          <div class="timeline__washi-tape" aria-hidden="true"></div>
+          <div class="timeline__panel-header">
+            <span class="timeline__year-badge">2026</span>
+            <h3 class="timeline__panel-title">TODAY ❤️</h3>
+          </div>
+          <div class="timeline__card-bd">
+            <div class="bd-frame bd-frame--timeline">
+              <img
+                src="assets/images/bubu-dudu/bubu-dudu-kisses.gif"
+                alt="Dudu showering Bubu with kisses and love today"
+                class="bd-gif"
+                loading="lazy"
+                onerror="this.src='assets/images/bubu-dudu/placeholder.svg'"
+              />
+            </div>
+            <p class="bd-caption-small">Still deeply in love with you 💖🥰</p>
+          </div>
+          <blockquote class="timeline__message">
+            <p>"Four years later, I'm still here. Still yours."</p>
+          </blockquote>
+          <div class="timeline__deco-elements" aria-hidden="true">
+            <span>❤️</span><span>✨</span><span>🥂</span>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- FINAL MEMORY SECTION — THINGS I'VE NEVER TOLD YOU 💌 -->
+      <section class="timeline__confession-card" aria-label="Things I've never told you">
+        <div class="timeline__confession-header">
+          <span class="timeline__confession-icon">💌</span>
+          <h3 class="timeline__confession-title">THINGS I'VE NEVER TOLD YOU 💌</h3>
+        </div>
+        <ul class="timeline__confession-list">
+          <li class="timeline__confession-item"><span class="confession-emoji">❤️</span> <span class="confession-text">"Thousands of memories."</span></li>
+          <li class="timeline__confession-item"><span class="confession-emoji">🥹</span> <span class="confession-text">"Countless nights."</span></li>
+          <li class="timeline__confession-item"><span class="confession-emoji">😂</span> <span class="confession-text">"Endless laughter."</span></li>
+          <li class="timeline__confession-item"><span class="confession-emoji">🌙</span> <span class="confession-text">"One beautiful journey."</span></li>
+          <li class="timeline__confession-item"><span class="confession-emoji">💗</span> <span class="confession-text">"And one person I'd still choose: YOU."</span></li>
+        </ul>
+
+        <div class="timeline__confession-highlight">
+          <div class="bd-frame bd-frame--confession">
+            <img
+              src="assets/images/bubu-dudu/bubu-happy-dudu.gif"
+              alt="Bubu and Dudu happily together forever"
+              class="bd-gif"
+              loading="lazy"
+              onerror="this.src='assets/images/bubu-dudu/placeholder.svg'"
+            />
+          </div>
+          <p class="timeline__confession-quote">
+            "If I could go back to 8 August 2022, I'd choose you all over again."
+          </p>
+        </div>
+      </section>
+
+      <!-- SECRET MESSAGE TEASER 🎁 -->
+      <div class="timeline__teaser" aria-label="Secret message teaser">
+        <p class="timeline__teaser-text">
+          🎁 There's one more message waiting for you at the end...
+        </p>
+        <span class="timeline__teaser-arrow" aria-hidden="true">↓</span>
+      </div>
+
+      <!-- Nav Button to Love Letter -->
+      <div class="timeline__nav">
+        <button class="btn-next" data-target="section-letter">Read Your Letter 💌</button>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SECTION 4 — LOVE LETTER
+  ============================================================ -->
+  <section id="section-letter" class="section section--letter hidden">
+    <div class="letter__wrapper">
+
+      <!-- Adorable Bubu Dudu companion sticker (responsive side/top placement) -->
+      <div class="letter__bd-sticker" aria-label="Bubu and Dudu love message">
+        <div class="bd-frame bd-frame--letter">
+          <img
+            src="assets/images/bubu-dudu/bubu-dudu-says-i-love-you.gif"
+            alt="Bubu holds a sign saying I Love You, just like I do for Junior"
+            class="bd-gif bd-gif--letter-sticker"
+            loading="lazy"
+            onerror="this.src='assets/images/bubu-dudu/placeholder.svg'"
+          />
+        </div>
+        <p class="bd-caption-small">Always &amp; Forever 💕</p>
+      </div>
+
+      <article class="letter__card">
+        <header class="letter__header">
+          <p class="letter__salutation">My Dearest Junior,</p>
+          <span class="letter__heart-flourish" aria-hidden="true">♥</span>
+        </header>
+        <div class="letter__body">
+          <p>
+            Words feel too small for what I feel, but I'll try anyway — because you deserve every
+            beautiful word that was ever written.
+          </p>
+          <p>
+            From the very first moment I knew you were someone special, my world changed quietly and
+            completely. You didn't just walk into my life; you rearranged it — turned ordinary
+            evenings into memories I replay when I miss you, turned ordinary laughter into something
+            I could live on forever.
+          </p>
+          <p>
+            You are the calm in my chaos, the warmth in my winters, the inexplicable joy that finds
+            me in the middle of a random Tuesday. Being loved by you is the best thing that has ever
+            happened to me.
+          </p>
+          <p>
+            On this birthday, I want you to know: <em>you are seen. You are adored. You are
+            irreplaceable.</em> Not just to me — but to every heart lucky enough to know you.
+          </p>
+          <p>
+            I hope this year wraps you in every good thing you deserve. I hope it is full of love,
+            laughter, warm food, good sleep, and all the little moments that make life feel worth
+            living.
+          </p>
+          <p>
+            And through every one of those moments — I'll be right there next to you, just like
+            Dudu next to Bubu. Always. 🐾💕
+          </p>
+        </div>
+        <footer class="letter__footer">
+          <div class="letter__sign-wrapper">
+            <p class="letter__sign">With all my love,</p>
+            <p class="letter__name">Your Dudu ❤️</p>
+          </div>
+          <div class="letter__stamp" aria-hidden="true">
+            <span class="letter__stamp-icon">🐾</span>
+            <span class="letter__stamp-text">JUNIOR &amp; DUDU</span>
+          </div>
+        </footer>
+      </article>
+    </div>
+
+    <div class="letter__nav">
+      <button class="btn-next" data-target="section-reasons">Reasons I Love You ❤️</button>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SECTION 5 — REASONS I LOVE YOU
+  ============================================================ -->
+  <section id="section-reasons" class="section section--reasons hidden">
+    <div class="reasons__wrapper">
+      <div class="reasons__header">
+        <h2 class="section-title">Reasons I Love You</h2>
+        <p class="section-subtitle">Just a few of infinitely many… 🌌</p>
+      </div>
+
+      <div class="reasons__grid">
+
+        <!-- Card 1 — smile -->
+        <div class="reasons__card">
+          <div class="reasons__badge-container">
+            <div class="bd-frame bd-frame--reason">
+              <img
+                src="assets/images/bubu-dudu/bubu-happy-dudu.gif"
+                alt="Happy Bubu and Dudu — your happiness makes me happy"
+                class="bd-gif"
+                loading="lazy"
+                onerror="this.style.display='none'"
+              />
+            </div>
+          </div>
+          <p class="reasons__number">01</p>
+          <h3 class="reasons__title">Your Smile</h3>
+          <p class="reasons__text">It's the kind of smile that makes a room feel warmer and my heart feel full.</p>
+        </div>
+
+        <!-- Card 2 — kindness -->
+        <div class="reasons__card">
+          <div class="reasons__badge-container">
+            <div class="reasons__emoji-badge" aria-hidden="true">🌸</div>
+          </div>
+          <p class="reasons__number">02</p>
+          <h3 class="reasons__title">Your Kindness</h3>
+          <p class="reasons__text">The way you care for others is one of the most beautiful things about you.</p>
+        </div>
+
+        <!-- Card 3 — laugh -->
+        <div class="reasons__card">
+          <div class="reasons__badge-container">
+            <div class="bd-frame bd-frame--reason">
+              <img
+                src="assets/images/bubu-dudu/bubu-dudu-eating-together.gif"
+                alt="Bubu and Dudu sharing a meal together happily"
+                class="bd-gif"
+                loading="lazy"
+                onerror="this.style.display='none'"
+              />
+            </div>
+          </div>
+          <p class="reasons__number">03</p>
+          <h3 class="reasons__title">Your Laugh</h3>
+          <p class="reasons__text">I could listen to your laugh for the rest of my life and never get tired.</p>
+        </div>
+
+        <!-- Card 4 — strength -->
+        <div class="reasons__card">
+          <div class="reasons__badge-container">
+            <div class="reasons__emoji-badge" aria-hidden="true">💪</div>
+          </div>
+          <p class="reasons__number">04</p>
+          <h3 class="reasons__title">Your Strength</h3>
+          <p class="reasons__text">You carry so much with so much grace. It amazes me every single day.</p>
+        </div>
+
+        <!-- Card 5 — the way you love -->
+        <div class="reasons__card">
+          <div class="reasons__badge-container">
+            <div class="bd-frame bd-frame--reason">
+              <img
+                src="assets/images/bubu-dudu/bubu-dudu-kisses.gif"
+                alt="Bubu and Dudu sharing sweet kisses"
+                class="bd-gif"
+                loading="lazy"
+                onerror="this.style.display='none'"
+              />
+            </div>
+          </div>
+          <p class="reasons__number">05</p>
+          <h3 class="reasons__title">How You Love</h3>
+          <p class="reasons__text">Being loved by you is the greatest gift I've ever received.</p>
+        </div>
+
+        <!-- Card 6 — your heart -->
+        <div class="reasons__card">
+          <div class="reasons__badge-container">
+            <div class="reasons__emoji-badge" aria-hidden="true">🫀</div>
+          </div>
+          <p class="reasons__number">06</p>
+          <h3 class="reasons__title">Your Heart</h3>
+          <p class="reasons__text">Warm, genuine, and endlessly generous — you are extraordinary.</p>
+        </div>
+
+      </div>
+
+      <div class="reasons__nav">
+        <button class="btn-next" data-target="section-cake">Birthday Celebration 🎂</button>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SECTION 6 — BIRTHDAY CELEBRATION / CAKE
+  ============================================================ -->
+  <section id="section-cake" class="section section--cake hidden">
+    <div class="cake__content">
+
+      <div class="cake__left">
+        <!-- Celebratory Bubu Dudu animation -->
+        <div class="bubu-dudu-pair bubu-dudu-pair--cake">
+          <div class="bd-frame bd-frame--cake">
+            <img
+              src="assets/images/bubu-dudu/bubu-dudu-butt-bump-dance.gif"
+              alt="Bubu and Dudu dancing and celebrating your birthday together"
+              class="bd-gif bd-gif--cake"
+              loading="lazy"
+              onerror="this.src='assets/images/bubu-dudu/placeholder.svg'"
+            />
+          </div>
+          <p class="bd-caption">Party time! 🎉</p>
+        </div>
+      </div>
+
+      <div class="cake__center">
+        <!-- Animated SVG Cake -->
+        <div class="cake__svg-wrapper" aria-label="Birthday cake">
+          <div class="cake__candles">
+            <div class="cake__flame" aria-hidden="true"></div>
+            <div class="cake__flame" aria-hidden="true"></div>
+            <div class="cake__flame" aria-hidden="true"></div>
+          </div>
+          <!-- Puff smoke appears after candles blown -->
+          <div class="cake__puff-container" id="cake-puff-container" aria-hidden="true"></div>
+          <div class="cake__body">
+            <div class="cake__tier cake__tier--top">
+              <div class="cake__frosting"></div>
+            </div>
+            <div class="cake__tier cake__tier--mid">
+              <div class="cake__frosting"></div>
+            </div>
+            <div class="cake__tier cake__tier--bot">
+              <div class="cake__frosting"></div>
+            </div>
+          </div>
+        </div>
+
+        <h2 class="cake__title">Make a Wish, Junior! 🌠</h2>
+        <p class="cake__subtitle">Every candle lit is a year of you — and every year is a gift.</p>
+
+        <!-- Step 1: Make-a-wish overlay message (hidden until button tapped) -->
+        <div class="cake__wish-msg" id="cake-wish-msg" aria-live="polite" aria-hidden="true">
+          <span class="cake__wish-emoji">✨</span>
+          <p class="cake__wish-text">Close your eyes, Junior,<br/>and make a wish! 💖</p>
+        </div>
+
+        <button id="btn-blow" class="btn-blow" aria-label="Blow out the candles">
+          Blow Out the Candles 🎂
+        </button>
+
+        <!-- Step 4: Birthday celebration card (hidden until candles blown) -->
+        <div class="cake__celebration" id="cake-celebration" aria-hidden="true" hidden>
+          <p class="cake__celebration-title">Happy Birthday, my Junior! 🎂❤️</p>
+          <p class="cake__celebration-sub">Make a wish, birthday girl.<br/>Your Dudu is always cheering for you! 🐰🐻💖</p>
+          <!-- Music feedback for mobile (shown if audio playback fails) -->
+          <p class="cake__music-notice" id="cake-music-notice" hidden>🎵 Add a song to <code>assets/audio/happy-birthday.mp3</code> for birthday music!</p>
+        </div>
+      </div>
+
+      <div class="cake__right">
+        <div class="bubu-dudu-pair bubu-dudu-pair--cake-right">
+          <div class="bd-frame bd-frame--cake">
+            <img
+              src="assets/images/bubu-dudu/bubu-dudu-smiling.gif"
+              alt="Bubu and Dudu smiling with joy at your birthday celebration"
+              class="bd-gif bd-gif--cake-right"
+              loading="lazy"
+              onerror="this.style.display='none'"
+            />
+          </div>
+          <p class="bd-caption">Yay, birthday girl! 🌸</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="cake__nav">
+      <!-- Lock hint shown if tapped before blowing candles -->
+      <div class="cake__lock-hint" id="cake-lock-hint" role="alert" aria-live="polite" hidden>
+        First, make a wish and blow out your candles, Junior! 🎂💗
+      </div>
+      <!-- Unlocked announcement shown after candles blown -->
+      <div class="cake__unlocked-msg" id="cake-unlocked-msg" role="status" aria-live="polite" hidden>
+        Your birthday wish is made! Now, one last surprise awaits you... 🎁❤️
+      </div>
+      <button class="btn-next btn-next--locked" id="btn-cake-next" data-target="section-final" aria-disabled="true" title="First blow out the candles!">
+        <span class="btn-lock-icon" aria-hidden="true">🔒</span>
+        <span class="btn-next-text">Final Surprise 💌</span>
+      </button>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SECTION 7 — FINAL SURPRISE & SECRET GIFT BOX
+  ============================================================ -->
+  <section id="section-final" class="section section--final hidden">
+    <div class="final__content">
+
+      <!-- Secret Gift Box Interactive Element -->
+      <div class="gift-box-wrapper" id="gift-box-wrapper">
+        <div class="gift-box" id="gift-box" role="button" tabindex="0" aria-label="Secret birthday gift box - tap to open">
+          <div class="gift-box__lid" id="gift-box-lid">
+            <span class="gift-box__bow" aria-hidden="true">🎀</span>
+            <div class="gift-box__ribbon-v" aria-hidden="true"></div>
+          </div>
+          <div class="gift-box__base">
+            <div class="gift-box__ribbon-v" aria-hidden="true"></div>
+            <div class="gift-box__ribbon-h" aria-hidden="true"></div>
+            <span class="gift-box__sparkle" aria-hidden="true">✨</span>
+          </div>
+        </div>
+
+        <button id="btn-open-gift" class="btn-surprise btn-gift" aria-label="Tap to open your secret birthday gift">
+          <span class="btn-surprise__inner">Open Secret Gift 🎁</span>
+          <span class="btn-surprise__ring" aria-hidden="true"></span>
+        </button>
+        <p class="gift-hint">tap the box or button to unwrap ✨</p>
+      </div>
+
+      <!-- Revealed content card (initially hidden, unveiled upon opening gift box) -->
+      <div class="final__revealed-card hidden" id="final-revealed-card">
+        <!-- Romantic hug animation in keepsake frame -->
+        <div class="final__bd-pair">
+          <div class="bd-frame bd-frame--final">
+            <img
+              src="assets/images/bubu-dudu/bubu-dudu-hugs.gif"
+              alt="Bubu and Dudu in a loving embrace — a hug from me to you, Junior"
+              class="bd-gif bd-gif--final"
+              loading="lazy"
+              onerror="this.src='assets/images/bubu-dudu/placeholder.svg'"
+            />
+          </div>
+          <p class="bd-caption">A hug from me across the distance 🫂</p>
+        </div>
+
+        <div class="final__message-wrapper">
+          <div class="final__stars" aria-hidden="true">✨ 🌟 ⭐ 🌟 ✨</div>
+          <h2 class="final__title">To My Junior</h2>
+          <div class="final__message">
+            <p>You are my favourite person. My home. My soft place.</p>
+            <p>Happy Birthday, baby. This year and every year after this — I hope you know how deeply, completely, and absolutely you are loved. Not just today. Every single day. 💕</p>
+          </div>
+          <div class="final__signature">
+            <p>Forever yours,</p>
+            <p class="final__signature-name">Your Dudu 🐾</p>
+          </div>
+
+          <!-- Animated hearts -->
+          <div class="final__hearts" aria-hidden="true">
+            <span class="heart-float">💖</span>
+            <span class="heart-float">💗</span>
+            <span class="heart-float">💕</span>
+            <span class="heart-float">💓</span>
+            <span class="heart-float">💞</span>
+          </div>
+
+          <!-- Sleepy cuddle sticker -->
+          <div class="final__sleep-sticker">
+            <div class="bd-frame bd-frame--sleep">
+              <img
+                src="assets/images/bubu-dudu/bubu-sleeping-dudu-carry.gif"
+                alt="Dudu gently carrying sleepy Bubu — I'll always carry you"
+                class="bd-gif bd-gif--sleep"
+                loading="lazy"
+                onerror="this.style.display='none'"
+              />
+            </div>
+            <p class="bd-caption-small">I'll always carry you 🌙</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="final__restart">
+      <button class="btn-restart" id="btn-restart" aria-label="Play again from the beginning">
+        Replay the Surprise 🔁
+      </button>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       PROGRESS INDICATOR
+  ============================================================ -->
+  <nav class="progress-nav" aria-label="Birthday surprise sections">
+    <button class="progress-dot active" data-section="section-welcome" aria-label="Welcome"></button>
+    <button class="progress-dot" data-section="section-reveal"  aria-label="Birthday reveal"></button>
+    <button class="progress-dot" data-section="section-timeline" aria-label="Our Little Forever timeline"></button>
+    <button class="progress-dot" data-section="section-letter"  aria-label="Love letter"></button>
+    <button class="progress-dot" data-section="section-reasons" aria-label="Reasons I love you"></button>
+    <button class="progress-dot" data-section="section-cake"    aria-label="Birthday cake"></button>
+    <button class="progress-dot" data-section="section-final"   aria-label="Final surprise"></button>
+  </nav>
+
+
+  <!-- Music toggle -->
+  <button class="music-toggle" id="btn-music" aria-label="Toggle background music" title="Toggle Music">
+    🎵
+  </button>
+
+  <!--
+    🎵 MUSIC SETUP INSTRUCTIONS:
+    Place your background music file at:   assets/audio/background-music.mp3
+    Place a happy birthday tune at:         assets/audio/happy-birthday.mp3
+
+    Both are optional — the website works without them.
+    If neither file exists, the 🎵 button shows a ? badge when tapped.
+  -->
+
+  <!-- Background / looping ambient music -->
+  <audio id="bg-music" loop preload="none">
+    <source src="assets/audio/background-music.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- One-shot Happy Birthday tune triggered by candle-blow -->
+  <audio id="hbd-music" preload="none">
+    <source src="assets/audio/happy-birthday.mp3" type="audio/mpeg" />
+    <!-- Fallback: reuse background music if happy-birthday.mp3 is missing -->
+    <source src="assets/audio/background-music.mp3" type="audio/mpeg" />
+  </audio>
+
+  <script src="assets/js/main.js"></script>
+
+<script>
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    const w = window.innerWidth;
+    console.log('--- LAYOUT DIAGNOSTIC ---');
+    console.log('window.innerWidth:', w);
+    console.log('document.documentElement.scrollWidth:', document.documentElement.scrollWidth);
+    console.log('document.body.scrollWidth:', document.body.scrollWidth);
+    
+    const all = document.querySelectorAll('*');
+    const overflows = [];
+    all.forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.right > w + 1) {
+        overflows.push({
+          tag: el.tagName,
+          id: el.id,
+          className: el.className,
+          right: rect.right,
+          width: rect.width
+        });
+      }
+    });
+    console.log('Overflowing elements count:', overflows.length);
+    overflows.slice(0, 10).forEach(o => console.log(JSON.stringify(o)));
+    console.log('--- END DIAGNOSTIC ---');
+  }, 500);
+});
+</script>
+
+</body>
+</html>

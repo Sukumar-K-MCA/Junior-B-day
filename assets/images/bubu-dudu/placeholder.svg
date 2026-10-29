@@ -1,0 +1,6 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <rect width="200" height="200" rx="20" fill="#12121a" stroke="#c9a84c" stroke-width="2"/>
+  <text x="100" y="80" text-anchor="middle" font-size="48">🐾</text>
+  <text x="100" y="120" text-anchor="middle" font-size="14" fill="#e8a0af" font-family="serif">Bubu &amp; Dudu</text>
+  <text x="100" y="145" text-anchor="middle" font-size="11" fill="#c9a84c" font-family="serif">Replace with GIF</text>
+</svg>
